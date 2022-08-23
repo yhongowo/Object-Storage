@@ -18,7 +18,9 @@ func NewRSGetStream(locateInfo map[int]string, dataServers []string, hash string
 	readers := make([]io.Reader, ALL_SHARDS)
 	for i := 0; i < ALL_SHARDS; i++ {
 		server := locateInfo[i]
+		//此server的分片损坏
 		if server == "" {
+			//更新locateinfo
 			locateInfo[i] = dataServers[0]
 			dataServers = dataServers[1:]
 			continue
